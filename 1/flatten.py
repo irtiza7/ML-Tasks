@@ -1,25 +1,31 @@
 import cv2 as CV2
 
-from PIL import Image
-# img = Image.open('image.png').convert('L')
-# img.save('greyscale.png')
+imagePath = []
 
-path = "./Circles/23.jpg"
-# img = CV2.imread(path)
-img = Image.open(path).convert('L')
-imgFlatten = img.flatten()
+for count in range(1, 25):
+    imagePath.append(f"./Circles/{count}.jpg")
 
-# imgResized = CV2.resize(img, (20, 20))
+for count in range(1, 25):
+    imagePath.append(f"./Rectangles/{count}.jpg")
 
-# imgFlatten = imgResized.flatten()
-# print(imgFlatten.size)
+for count in range(1, 25):
+    imagePath.append(f"./Triangles/{count}.jpg")
 
-# i = 0
 
-# for i in imgResized:
-#     print(i)
+for path in imagePath:
 
-# for e in imgFlatten:
-#     if e < 250:
-#         i += 1
-#         print(i, e)
+    imageRaw = CV2.imread(path, 0)
+    imageResized = CV2.resize(imageRaw, (30, 30))
+    imageFlattened = imageResized.flatten()
+
+    temp = []
+
+    for pixel in imageFlattened:
+        if pixel < 250:
+            temp.append(1)
+        else:
+            temp.append(0)
+
+    print(temp)
+
+
