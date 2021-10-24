@@ -8,9 +8,8 @@ def read_dataset(path):
 
 def divide_dataset(dataset):
     total_samples = dataset.nrows - 1
-    total_columns = dataset.ncols
 
-    random_samples_indexes = list(range(2, total_samples + 2))
+    random_samples_indexes = list(range(1, total_samples + 1))
     random.shuffle(random_samples_indexes)
 
     training_samples_indexes = []
