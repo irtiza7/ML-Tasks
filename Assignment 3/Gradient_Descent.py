@@ -77,19 +77,13 @@ total_samples = dataset.nrows - 1
 random_indexes = list(range(1, total_samples + 1))
 random.shuffle(random_indexes)
 
-train_samples_indexes = []
-test_samples_indexes = []
-
-num_of_train_samples = int(input("Training Samples> "))
-maximum_iterations = int(input("Maximum Iterations> "))
+num_of_train_samples = int(input("Training Samples: "))
+maximum_iterations = int(input("Maximum Iterations: "))
 weights = [-0.3, 0.2, 0, -0.2, 0.3]
-learning_rate = float(input("Learning Rate> "))
+learning_rate = float(input("Learning Rate: "))
 
-for i in range(len(random_indexes)):
-    if i < num_of_train_samples:
-        train_samples_indexes.append(random_indexes[i])
-    else:
-        test_samples_indexes.append(random_indexes[i])
+train_samples_indexes = [random_indexes[i] for i in range(len(random_indexes)) if i < num_of_train_samples]
+test_samples_indexes = [random_indexes[i] for i in range(len(random_indexes)) if i >= num_of_train_samples]
 
 index = 0
 costs = []
