@@ -60,7 +60,14 @@ def update_weights(old_weights, features, y, y_hat, learning_rate):
     return new_weights
 
 def plot_cost_graph(costs, iterations):
-    plt.plot(np.array(iterations), np.array(costs), color = 'green', linestyle = 'dashed', linewidth = 1, marker = 'o', markerfacecolor = 'blue', markersize = 2)
+    plt.plot(
+        np.array(iterations), 
+        np.array(costs), 
+        color = 'green', 
+        linestyle = 'dashed', 
+        linewidth = 1, marker = 'o', 
+        markerfacecolor = 'blue', 
+        markersize = 2)
     plt.xlim(-100, 10100)
     plt.ylim(0.00008, 0.1)
     plt.xlabel('Iterations')
@@ -107,7 +114,7 @@ for iteration in range(1, maximum_iterations + 1):
     if index >= len(train_samples_indexes):
         index = 0
 
-print("---------------TRAINING ENDED---------------")
+print("____________________TRAINING ENDED____________________")
 print(f"Final Weights after {maximum_iterations} Iterations")
 for w in weights:
     print(w)
@@ -115,7 +122,8 @@ for w in weights:
 print(f"Final Cost after {maximum_iterations} Iterations = {cost}")
 plot_cost_graph(costs, iters)
 
-print("---------------TESTING STARTED---------------")
+print()
+print("____________________TESTING STARTED____________________")
 mismatches = 0
 for idx in test_samples_indexes:
     features = get_features(dataset, idx)
@@ -126,3 +134,6 @@ for idx in test_samples_indexes:
 
 print(f"Total Testing Samples = {len(test_samples_indexes)}")
 print(f"Total Mismatches = {mismatches}")
+
+accuracy = 100 - (mismatches / len(test_samples_indexes) * 100)
+print(f"Testing Accuracy = {accuracy}%")
