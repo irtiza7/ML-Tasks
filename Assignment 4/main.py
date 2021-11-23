@@ -1,7 +1,8 @@
+from math import cos
 import numpy as np
 import helping_functions as hf
 
-# 
+# Number of perceptrons in hidden layer.
 PERCEPTRONS = 16
 
 dataset_choice = int(input("Dataset to use? [1] for MNIST and [2] for Iris Flower > "))
@@ -14,7 +15,13 @@ weights_vector_B = hf.random_weights_vector(total_classes, PERCEPTRONS)
 biases_vector_A = hf.random_biases_vector(PERCEPTRONS, 1)
 biases_vector_B = hf.random_biases_vector(total_classes, 1)
 
-i = 0
+# Printing dimensions for each level's weights and biases vectors.
+print(f"\nDimensions of Weights Vector for Level A: {(np.array(weights_vector_A)).shape}")
+print(f"Dimensions of Weights Vector for Level B: {(np.array(weights_vector_B)).shape}")
+print(f"Dimensions of Biases Vector for Level A: {(np.array(biases_vector_A)).shape}")
+print(f"Dimensions of Biases Vector for Level B: {(np.array(biases_vector_B)).shape}\n")
+
+current_sample = 0
 costs = []
 
 # Feeding each sample to neural network and calculating cost
@@ -53,3 +60,11 @@ for sample_values in samples_features_values:
     max_value = np.max(output_layer_results)
     y_hat = list(output_layer_results).index(max_value)
     y_hat += 1
+
+    # Calculating cost of single sample and appending it to array of costs
+    y = samples_classes[current_sample]
+    costs.append(hf.calculate_cost(y, y_hat))
+    current_sample += 1
+
+final_cost = hf.mean_squared_error(costs, total_samples)
+print(f"Final Cost for All Samples in the Dataset: {final_cost}\n")

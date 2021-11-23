@@ -1,13 +1,16 @@
+from math import cos
 import numpy as np
 import pandas as pd
 import random
-import xlrd
-from xlrd.formula import _TOKEN_NOT_ALLOWED
 
-def mean_squared_error(y, y_hat, total_samples):
-    error = y - y_hat
-    error = pow(error, 2) / total_samples
+def mean_squared_error(costs, total_samples):
+    costs = np.array(costs)
+    sum_of_costs = np.sum(costs)
+    error = sum_of_costs / total_samples
     return error
+
+def calculate_cost(y, y_hat):
+    return (y - y_hat) ** 2
 
 def sigmoid(x):
     return 1 / (1 + np.exp(-x))
