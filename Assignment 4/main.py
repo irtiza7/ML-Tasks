@@ -48,7 +48,7 @@ def main():
         weighted_sums_B = weighted_sums_B.reshape(total_classes, 1)
         weighted_sums_B = hf.add_biases(weighted_sums_B, biases_vector_B)
     
-        # Applying Sigmoid Activation Function to weighted sums of each perceptron in output layer
+        # Applying Sigmoid activation function to weighted sums of each perceptron in output layer
         output_layer_results = []
         for perceptron_output in weighted_sums_B:
             sigmoid = hf.sigmoid(perceptron_output[0])
