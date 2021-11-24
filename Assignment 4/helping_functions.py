@@ -3,11 +3,8 @@ import numpy as np
 import pandas as pd
 import random
 
-def mean_squared_error(costs, total_samples):
-    costs = np.array(costs)
-    sum_of_costs = np.sum(costs)
-    error = sum_of_costs / total_samples
-    return error
+def mean_squared_error(sum_of_errors, total_samples):
+    return sum_of_errors / total_samples 
 
 def calculate_cost(y, y_hat):
     return (y - y_hat) ** 2

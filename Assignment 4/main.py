@@ -1,4 +1,3 @@
-from math import cos
 import numpy as np
 import helping_functions as hf
 
@@ -23,7 +22,7 @@ def main():
     print(f"Dimensions of Biases Vector for Level B: {(np.array(biases_vector_B)).shape}\n")
 
     current_sample = 0
-    costs = []
+    sum_of_errors = 0
 
     # Feeding each sample to neural network and calculating cost
     for sample_values in samples_features_values:
@@ -62,13 +61,14 @@ def main():
         y_hat = list(output_layer_results).index(max_value)
         y_hat += 1
 
-        # Calculating cost of single sample and appending it to array of costs
         y = samples_classes[current_sample]
-        costs.append(hf.calculate_cost(y, y_hat))
         current_sample += 1
 
-    final_cost = hf.mean_squared_error(costs, total_samples)
+        # Calculating error of single sample
+        sum_of_errors += hf.calculate_cost(y, y_hat)
+
+    final_cost = hf.mean_squared_error(sum_of_errors, total_samples)
     print(f"Final Cost for All Samples in the Dataset: {final_cost}\n")
 
-if __name__ == 'main':
+if __name__ == '__main__':
     main()
